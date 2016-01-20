@@ -1,6 +1,0 @@
-bin/
-obj/
-packages/
-*.js.map
-*.suo
-*.csproj.user
