@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TypeScript HTML App</title>
+    <link rel="stylesheet" href="app.css" type="text/css" />
+    <script src="Scripts/handlebars.min.js"></script>
+    <script src="Scripts/marked.js"></script>
+    <script src="Littlei.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <script id="home-template" type="text/x-handlebars-template">
+        <h3 class="post-title">{{ title }}</h3>
+        <p class="post-content">{{ date }} - {{ excerpt }}</p>
+        <p><a href="/#post/{{ name }}">Read More</a></p>
+    </script>
+
+    <script id="post-template" type="text/x-handlebars-template">
+        <h3 class="post-title">{{ title }}</h3>
+        <p class="post-content">{{ content }}</p>
+    </script>
+
+    <script id="page-template" type="text/x-handlebars-template">
+        <h3 class="page-title">{{ title }}</h3>
+        <p class="page-content">{{ content }}</p>
+    </script>
+
+    <div id="cms_nav">
+
+    </div>
+
+    <div id="cms">
+
+    </div>
+</body>
+</html>
