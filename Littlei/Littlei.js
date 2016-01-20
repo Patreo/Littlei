@@ -14,10 +14,9 @@ var Littlei;
         }
         HomeRender.prototype.render = function (title) {
             if (title === void 0) { title = ""; }
+            var tmpl = document.getElementById("home-template");
             var html = document.querySelector(this.config.mainContainer);
-            html.innerHTML = "";
             this.data.forEach(function (post, i) {
-                var tmpl = document.getElementById("home-template");
                 var template = Handlebars.compile(tmpl.innerHTML, { noEscape: true });
                 var result = template(post);
                 html.innerHTML += result;
@@ -163,7 +162,7 @@ var Littlei;
             callback();
             return target;
         };
-        CMS.prototype.render = function (url) {
+        CMS.prototype.render = function (url, pageCallBack) {
             var _this = this;
             var mainContainer = document.querySelector(this.config.mainContainer);
             if (mainContainer != null) {
@@ -178,41 +177,55 @@ var Littlei;
             var name = segments[1];
             var render;
             var map = {
-                "": function (callback) {
+                "": function (callback, pageCallBack) {
                     render = new HomeRender(_this.config, _this.posts);
                     callback(render);
+                    if (pageCallBack) {
+                        pageCallBack("home");
+                    }
                 },
                 "#post": function (callback) {
                     render = new PostRender(_this.config, _this.posts);
                     callback(render);
+                    if (pageCallBack) {
+                        pageCallBack(url);
+                    }
                 },
                 "#page": function (callback) {
                     render = new PageRender(_this.config, _this.pages);
                     callback(render);
+                    if (pageCallBack) {
+                        pageCallBack(url);
+                    }
                 }
             };
             if (map[type]) {
                 map[type](function (render) {
                     render.render(name);
-                });
+                }, pageCallBack);
             }
             else {
                 alert("No mapping for current type. Please install new type and reload page.");
             }
             render = new FooterRender(_this.config);
             render.render("");
+            this.fadeIn(mainContainer);
+            window.scrollTo(0, 0);
         };
         /**
          */
-        CMS.prototype.build = function () {
+        CMS.prototype.build = function (callback, pageCallBack) {
             var _this = this;
             _this.setSiteAttributes();
             [Post.Post, Post.Page].forEach(function (el, i) {
                 _this.getFiles(el);
             });
             window.onhashchange = function () {
-                _this.render(window.location.hash);
+                _this.render(window.location.hash, pageCallBack);
             };
+            if (callback) {
+                callback();
+            }
         };
         /**
          */
@@ -292,8 +305,9 @@ var Littlei;
                     if (item.trim() != "") {
                         item.replace(/^\s+|\s+$/g, '').trim();
                         var x = item.split(':');
-                        var val = x[1];
                         var xi = x[0];
+                        x.shift();
+                        var val = x.join(":");
                         obj[xi] = val.trim();
                     }
                 });
@@ -411,6 +425,16 @@ var Littlei;
             else {
                 xhr.send(data);
             }
+        };
+        CMS.prototype.fadeIn = function (element) {
+            element.style.opacity = "0";
+            var tick = function () {
+                element.style.opacity = (parseFloat(element.style.opacity) + 0.01).toString();
+                if (parseFloat(element.style.opacity) < 1) {
+                    (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+                }
+            };
+            tick();
         };
         return CMS;
     })();

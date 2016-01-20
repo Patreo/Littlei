@@ -21,11 +21,10 @@ module Littlei {
         }
 
         public render(title: string = "") {  
+            let tmpl = document.getElementById("home-template");
             let html: HTMLHtmlElement = document.querySelector(this.config.mainContainer) as HTMLHtmlElement;
-            html.innerHTML = "";
-                      
-            this.data.forEach((post, i) => {
-                let tmpl = document.getElementById("home-template");
+
+            this.data.forEach((post, i) => {                
                 let template = Handlebars.compile(tmpl.innerHTML, { noEscape: true });
                 let result: string = template(post);
 
@@ -80,7 +79,7 @@ module Littlei {
 
                     html.innerHTML = result;
                 }
-            });
+            });            
         }
     }
 
@@ -188,7 +187,7 @@ module Littlei {
             return target;
         }
 
-        public render(url) {
+        public render(url, pageCallBack?: any) {
             let _this = this;
 
             let mainContainer = document.querySelector(this.config.mainContainer) as HTMLHtmlElement;           
@@ -207,35 +206,49 @@ module Littlei {
             let render: IRender;
 
             let map = {
-                "": function (callback: any) {
+                "": function (callback: any, pageCallBack?: any ) {
                     render = new HomeRender(_this.config, _this.posts);
                     callback(render);
+
+                    if (pageCallBack) {
+                        pageCallBack("home");
+                    }
                 },
                 "#post": function (callback: any) {
                     render = new PostRender(_this.config, _this.posts);
                     callback(render);
+
+                    if (pageCallBack) {
+                        pageCallBack(url);
+                    }
                 },
                 "#page": function (callback: any) {
                     render = new PageRender(_this.config, _this.pages);
                     callback(render);
+
+                    if (pageCallBack) {
+                        pageCallBack(url);
+                    }
                 }
             };
 
             if (map[type]) {
                 map[type](function (render: IRender) {
                     render.render(name);
-                });
+                }, pageCallBack);
             } else {
                 alert("No mapping for current type. Please install new type and reload page.");
             }
 
             render = new FooterRender(_this.config);
             render.render("");
+            this.fadeIn(mainContainer);
+            window.scrollTo(0, 0);
         }
 
         /**
          */
-        public build() {
+        public build(callback?: any, pageCallBack?: any) {
             let _this = this;
             _this.setSiteAttributes();
 
@@ -244,8 +257,12 @@ module Littlei {
             });
 
             window.onhashchange = function () {
-                _this.render(window.location.hash);
+                _this.render(window.location.hash, pageCallBack);
             };
+
+            if (callback) {
+                callback();
+            }
         }
 
         /**
@@ -334,8 +351,10 @@ module Littlei {
                         item.replace(/^\s+|\s+$/g, '').trim();
 
                         let x: Array<string> = item.split(':');
-                        let val = x[1];
                         let xi = x[0];
+                        x.shift();
+                        let val = x.join(":");
+                        
                         obj[xi] = val.trim();
                     }
                 });
@@ -472,6 +491,20 @@ module Littlei {
             else {
                 xhr.send(data);
             }
+        }
+
+        private fadeIn(element: HTMLElement) {
+            element.style.opacity = "0";
+
+            var tick = function () {
+                element.style.opacity = (parseFloat(element.style.opacity) + 0.01).toString();
+
+                if (parseFloat(element.style.opacity) < 1) {
+                    (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+                }
+            };
+
+            tick();
         }
 
     }
