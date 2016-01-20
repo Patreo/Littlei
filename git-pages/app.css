@@ -1,0 +1,37 @@
+﻿body {
+}
+
+#cms .col-md-6 {
+    margin: 0 -0.125em;
+    margin-top:30px;
+    display: inline-block;
+    float: initial;
+}
+
+    #cms .col-md-6 img {
+        min-height: 221px;
+    }
+
+.post-title {
+    margin-bottom: 15px;
+}
+
+.post-content {
+    text-align: justify !important;
+}
+
+
+    .post-content img {
+         width: 100%;
+        -webkit-border-radius: 10px;
+         border-radius: 10px;
+         margin-bottom: 15px;
+    }
+
+#home-template {
+
+}
+
+#post-template {
+
+}
