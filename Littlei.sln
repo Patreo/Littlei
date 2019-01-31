@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Littlei", "Littlei\Littlei.csproj", "{F4D5F045-2302-4383-8E30-1AD627FB73FE}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Littlei", "Littlei.njsproj", "{8EEA1A71-CE96-4244-A19F-AEA24E6D4F84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F4D5F045-2302-4383-8E30-1AD627FB73FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4D5F045-2302-4383-8E30-1AD627FB73FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4D5F045-2302-4383-8E30-1AD627FB73FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4D5F045-2302-4383-8E30-1AD627FB73FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EEA1A71-CE96-4244-A19F-AEA24E6D4F84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EEA1A71-CE96-4244-A19F-AEA24E6D4F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EEA1A71-CE96-4244-A19F-AEA24E6D4F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EEA1A71-CE96-4244-A19F-AEA24E6D4F84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC342159-FD21-40A1-B3C6-4AF1FC44CC72}
 	EndGlobalSection
 EndGlobal

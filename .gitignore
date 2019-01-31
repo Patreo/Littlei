@@ -1,6 +1,8 @@
-bin/
+\.vs/
+bower_components/
+node_modules/
 obj/
-packages/
-*.js.map
-*.suo
-*.csproj.user
+dist/
+build/
+
+package-lock.json

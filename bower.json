@@ -1,0 +1,17 @@
+{
+  "name": "littlei",
+  "private": true,
+  "dependencies": {
+    "jQuery": "3.3.1",
+    "angular": "^1.7.5",
+    "angular-sanitize": "^1.7.5",
+    "angular-cookies": "^1.7.5",
+    "angular-route": "^1.7.5",
+    "timeago": "1.6.3",
+    "bootstrap": "^4.2.1",
+    "font-awesome": "^4.2.1"
+  },
+  "resolutions": {
+    "angular": "^1.7.5"
+  }
+}

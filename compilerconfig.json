@@ -1,0 +1,6 @@
+﻿[
+  {
+    "inputFile": "styles/style.less",
+    "outputFile": "dist/styles/style.css"
+  }
+]
